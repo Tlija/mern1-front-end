@@ -1,4 +1,4 @@
-import { GETALLPRODUCTSFAILED, GETALLPRODUCTSSUCCESS, LOADING } from "../actionTypes/productConst"
+import { PRODUCTFAILED, GETALLPRODUCTSSUCCESS, LOADING } from "../actionTypes/productConst"
 
 const initialState = {
     loading:true,
@@ -13,7 +13,7 @@ export const productReducer= (state = initialState, { type, payload }) => {
     return { ...state,loading:true }
 case GETALLPRODUCTSSUCCESS:
     return{...state,products:payload,loading:false}
-    case GETALLPRODUCTSFAILED:
+    case PRODUCTFAILED:
         return{...state,loading:false,error:payload}
   default:
     return state

@@ -1,24 +1,34 @@
 import React from 'react';
-// import './Card.css';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { useDispatch } from 'react-redux';
+import { deleteproduct } from '../../JS/actions/productActions';
+
+
 
 const ProductCard = ({el}) => {
+  const dispatch=useDispatch()
   return (
+    <>
+    
 <div>
-  <div className="container">
-    <div className="content">
-      <h1>{el.title}</h1>
-      <h3>{el.price}</h3>
-      <h2>{el.qtes}</h2>
-    </div>
-    <div>
-        <button>see Details</button>
-        <button>Edit</button>
-        <button>Delete</button>
-    </div>
-    <div className="flap" />
-  </div>
+ 
+<Card border="primary" style={{ width: '18rem',marginTop:'20px' }}>
+        <Card.Header>{el.title}</Card.Header>
+        <Card.Body>
+          <Card.Title>{el.qtes?el.qtes:'fin du stock'}</Card.Title>
+          <Card.Text>
+           {el.price} DT
+          </Card.Text>
+          <Button variant="primary">See Details</Button>{' '}
+          <Button variant="success">Edit</Button>{' '}
+          <Button variant="danger" onClick={()=>dispatch(deleteproduct(el._id))}>Delete</Button>{' '}
+
+        </Card.Body>
+      </Card>
   
 </div>
+</>
   )
 }
 

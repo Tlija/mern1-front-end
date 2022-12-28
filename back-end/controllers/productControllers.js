@@ -11,7 +11,7 @@ const addProd=async(req,res)=>{
         return res.status(400).send({msg:"produit deja exist"})
        }
        await prod.save() 
-        res.send(prod)
+        res.send({msg:"produit added successfully"})
     } catch (error) {
         res.status(400).send({msg:error.message})
     }
