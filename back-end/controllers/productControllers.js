@@ -5,7 +5,8 @@ const productModel=require('../model/productModel')
 
 const addProd=async(req,res)=>{
     try {
-        const prod=new productModel({...req.body})
+        const url=`${req.protocol}://${req.get('host')}`
+        const prod=new productModel({...req.body,image:`${url}/${req.file.path}`})
         const existProduct= await productModel.findOne({title:prod.title})
        if (existProduct) {
         return res.status(400).send({msg:"produit deja exist"})
@@ -53,10 +54,12 @@ const deleteOneProduct=async(req,res)=>{
     }
 }
 const updateOneProduct=async(req,res)=>{
+    const url=`${req.protocol}://${req.get('host')}`
+
     const{id}=req.params
     try {
-       const updatedProduct= await productModel.findOneAndUpdate({_id:id}, { ...req.body },{new:true})
-        res.send({msg:'product successfully updated',updatedProduct})
+       const updatedProduct= await productModel.findOneAndUpdate({_id:id}, { ...req.body,image:`${url}/${req.file.path}` },{new:true})
+        res.send({msg:'product successfully updated'})
     } catch (error) {
         res.send({msg:error.message})
     }

@@ -33,6 +33,9 @@ const AddProduct = () => {
       label: "info",
     },
   ];
+  //set image
+  const [image, setImage] = useState('')
+
 
   // set value for default selection
   const [selectedValue, setSelectedValue] = useState([]);
@@ -56,12 +59,23 @@ const AddProduct = () => {
 const navigate=useNavigate()
 const handleSubmit=(e)=>{
     e.preventDefault()
-    const newProd={...product,category:selectedValue,instoke:product.qtes?true:false}  
-    dispatch(addproduct(newProd,navigate))
-    console.log(newProd)
+    // const newProd={...product,category:selectedValue,instoke:product.qtes?true:false,image:image}  
+   const data= new FormData()
+   data.append('file',image)
+   data.append('title',product.title)
+   data.append('description',product.description)
+   data.append('price',product.price)
+   data.append('qtes',product.qtes)
+   data.append('category',selectedValue)
+   data.append('instoke',product.qtes?true:false)
+
+
+
+     dispatch(addproduct(data,navigate))
+    console.log(data)
     setSelectedValue([])
     setProduct({
-        title: "",
+    title: "",
     description: "",
     price: 0,
     qtes: 0,
@@ -108,6 +122,14 @@ const handleSubmit=(e)=>{
             name="price"
             onChange={handleChangeProd}
             value={product.price}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>image</Form.Label>
+          <Form.Control
+            type="file"
+            name="file"
+            onChange={(e)=>setImage(e.target.files[0])}
           />
         </Form.Group>
         <Select

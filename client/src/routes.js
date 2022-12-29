@@ -3,6 +3,8 @@ import { Home } from './Pages/Home';
 import { useRoutes } from "react-router-dom";
 import ProductList from './Pages/ProductList';
 import AddProduct from './Pages/AddProduct';
+import ProductDetails from './Pages/ProductDetails';
+import EditProduct from './Pages/EditProduct';
 
 
 const Routes = () => {
@@ -18,6 +20,14 @@ const Routes = () => {
         {
           path: "/add",
           element: <AddProduct/>
+        },
+        {
+          path: "/details/:idprod",
+          element: <ProductDetails/>
+        },
+        {
+          path: "/edit",
+          element: <EditProduct/>
         }
          
       ]);

@@ -1,6 +1,7 @@
 const express =require('express')
  const app= express()
  require('dotenv').config({path:'./config/.env'})
+ app.use('/uploads',express.static(__dirname+'/uploads'))
  const connectdb=require('./config/connectdb')
 
  app.use(express.json())
